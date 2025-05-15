@@ -5,6 +5,10 @@ import ProjectToReact from "./Components/ProjectToReact.jsx";
 import LabDay2 from "./Components/LabDay2.jsx";
 import Coin from "./Components/Coin.jsx";
 import ReusableBtn from "./Components/ReusableBtn.jsx";
+import ProductUi from "./Components/ProductUi.jsx";
+import Products from "./Components/Product.jsx";
+import Register from "./Components/Register.jsx";
+
 function App() {
   return (
     <div>
@@ -13,7 +17,7 @@ function App() {
       <Home />
 
       <Login/> */}
-      <div className="flex justify-center items-center">
+      {/* <div className="flex justify-center items-center">
       <ReusableBtn 
         label='btn1'
         onClick={() => alert('btn1 done')} 
@@ -32,9 +36,11 @@ function App() {
         variant="danger" 
         size="large" 
       />
-    </div>
-      <LabDay2/>
-      <Coin/>
+    </div> */}
+      {/* <LabDay2/>
+      <Coin/> */}
+      {/* <Products/> */}
+      <Register/>
     </div>
   );
 }
