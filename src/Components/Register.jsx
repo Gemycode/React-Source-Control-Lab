@@ -2,19 +2,23 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
-// Zod Schema
-const formSchema = z
-  .object({
-    name: z.string({ required_error: "Name is required" }).min(3, "Must be at least 3 chars"),
-    email: z.string({ required_error: "Email is required" }).email("Invalid email"),
-    city: z.string().nonempty("City required"),
-    password: z.string().min(8, "Must be at least 8 chars"),
-    confirmPassword: z.string().min(8, "Confirm password is required"),
-  })
- 
+const formSchema = z.object({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(3, "Must be at least 3 chars"),
+  email: z
+    .string({ required_error: "Email is required" })
+    .email("Invalid email"),
+  city: z.string().nonempty("City required"),
+  password: z.string().min(8, "Must be at least 8 chars"),
+  confirmPassword: z.string().min(8, "Confirm password is required"),
+});
 
 export default function Register() {
+    // لسة باقيلى استخدام ال useState عشان اتحكم فى اللون للبوردر 
+  const [borderStyle, setBorderStyle] = useState("1px solid #ccc");
   const {
     register,
     handleSubmit,
@@ -23,7 +27,7 @@ export default function Register() {
 
   const onSubmit = (data) => {
     console.log(data);
-    alert("Registration successful!");
+    alert("Registration successful");
   };
 
   return (
@@ -34,18 +38,20 @@ export default function Register() {
       >
         <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
 
- 
         <div>
           <label className="block text-sm font-medium mb-1">Full Name</label>
           <input
+            
+           
             type="text"
             {...register("name")}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
         </div>
 
-    
         <div>
           <label className="block text-sm font-medium mb-1">Email</label>
           <input
@@ -55,9 +61,10 @@ export default function Register() {
             {...register("email")}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
-
 
         <div>
           <label className="block text-sm font-medium mb-1">City</label>
@@ -70,28 +77,38 @@ export default function Register() {
             <option value="aswan">Aswan</option>
             <option value="luxor">Luxor</option>
           </select>
-          {errors.city && <p className="text-red-500 text-sm">{errors.city.message}</p>}
+          {errors.city && (
+            <p className="text-red-500 text-sm">{errors.city.message}</p>
+          )}
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Password</label>
           <input
             type="password"
+            onFocus={(e) => (e.target.style.border = "1px solid red")}
+            onBlur={(e) => (e.target.style.border = "1px solid #ccc")}
             {...register("password")}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Confirm Password</label>
+          <label className="block text-sm font-medium mb-1">
+            Confirm Password
+          </label>
           <input
             type="password"
             {...register("confirmPassword")}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.confirmPassword && (
-            <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
+            <p className="text-red-500 text-sm">
+              {errors.confirmPassword.message}
+            </p>
           )}
         </div>
 
